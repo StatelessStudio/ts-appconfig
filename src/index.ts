@@ -4,7 +4,7 @@ export { Configuration } from './configuration';
 export { configure } from './configure';
 
 // Types
-export * from './types';
+export { Key, Value, AppEnvironment } from './types';
 
 // Exceptions
 export { DuplicateKeyError } from './errors/duplicate-key';
