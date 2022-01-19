@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { env } from './env';
 
 // Log the APP_TITLE from .env
