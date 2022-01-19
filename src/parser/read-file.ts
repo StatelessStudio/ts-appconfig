@@ -1,10 +1,11 @@
-import { readFileSync } from 'fs';
+import { existsSync, readFileSync } from 'fs';
 import { join as joinPath } from 'path';
 
 import { newLineRegex } from '../regex/new-line';
 
 /**
- * Read a file into an array of non-empty lines
+ * Read a file into an array of non-empty lines. If no file is found, an empty
+ * 	array is returned.
  *
  * @param filename Input filename
  * @returns Returns an array of strings, where each non-empty line is an
@@ -13,8 +14,13 @@ import { newLineRegex } from '../regex/new-line';
 export function readFileLines(filename: string): string[] {
 	const file = joinPath(process.cwd(), filename);
 
-	return readFileSync(file)
-		.toString()
-		.split(new RegExp(newLineRegex, 'g'))
-		.filter(line => line && line.length);
+	if (existsSync(file)) {
+		return readFileSync(file)
+			.toString()
+			.split(new RegExp(newLineRegex, 'g'))
+			.filter(line => line && line.length);
+	}
+	else {
+		return [];
+	}
 }
