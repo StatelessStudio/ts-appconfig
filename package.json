@@ -2,6 +2,7 @@
 	"name": "ts-appconfig",
 	"version": "0.0.0",
 	"ts-project-version": "1.2.4",
+	"private": "true",
 	"scripts": {
 		"start": "npm run dev",
 		"dev": "npm run lint && ts-node src/index.ts",
@@ -34,6 +35,7 @@
 		"nyc": "^15.1.0",
 		"source-map-support": "^0.5.21",
 		"ts-node": "^10.4.0",
+		"ts-packager": "^1.0.1",
 		"typedoc": "^0.22.10",
 		"typescript": "^4.5.4"
 	}
