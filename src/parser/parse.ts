@@ -3,6 +3,7 @@ import { UnparsableLineError } from '../errors/unparsable-line';
 import { ParserOptions } from '../options/parser-options';
 import { RawKeyValues } from '../types';
 import { lineRegex } from '../regex/line';
+import { stripComment } from './strip-comment';
 
 /**
  * Parse lines into string/string key-values
@@ -48,7 +49,7 @@ export function parseLines(
 		}
 
 		// Read val
-		const val = parts[2];
+		const val = stripComment(parts[2]);
 
 		// Assign value
 		vars[key] = val;
