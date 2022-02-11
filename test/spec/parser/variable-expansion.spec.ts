@@ -48,7 +48,8 @@ describe('parser/variable-expansion', () => {
 	});
 
 	it('can detect undefined references', () => {
-		const expectedErrorMessage = 'Undefined env reference to "NOTHING" from "TEST"';
+		const expectedErrorMessage =
+			'Undefined env reference to "NOTHING" from "TEST"';
 
 		expect(() => configure(UndefinedReferenceEnvironment)).toThrow(
 			new UndefinedReferenceError(expectedErrorMessage)
