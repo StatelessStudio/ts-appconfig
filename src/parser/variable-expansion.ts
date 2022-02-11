@@ -1,4 +1,7 @@
-import { CircularReferenceError } from '../errors/circular-reference';
+import {
+	CircularReferenceError,
+	UndefinedReferenceError
+} from '../errors';
 import { Configuration } from '../configuration';
 import { variableRegex } from '../regex/variable';
 
@@ -26,6 +29,14 @@ export function variableExpansion<T extends Configuration>(config: T): T {
 
 			if (parts) {
 				const reference: string = parts[1];
+
+				if (!(reference in config)) {
+					throw new UndefinedReferenceError(
+						'Undefined env reference to ' +
+						`"${reference}" from "${key}"`
+					);
+				}
+
 				const refval: string = config[reference];
 				const refvalIsString = (typeof refval === 'string');
 

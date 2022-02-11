@@ -1,6 +1,7 @@
 import {
-	CircularReferenceError
-} from '../../../src/errors/circular-reference';
+	CircularReferenceError,
+	UndefinedReferenceError
+} from '../../../src/errors';
 
 import { AppConfig, configure } from '../../../src';
 
@@ -18,6 +19,10 @@ export const env: Environment = configure(Environment);
 export class CircularRefEnvironment extends AppConfig {
 	A = '${B}';
 	B = '${A}';
+}
+
+export class UndefinedReferenceEnvironment extends AppConfig {
+	TEST = '${NOTHING}';
 }
 
 describe('parser/variable-expansion', () => {
@@ -39,5 +44,13 @@ describe('parser/variable-expansion', () => {
 
 	it('can reference a number variable', () => {
 		expect(env.NUMBER_REF).toBe('2');
+	});
+
+	it('can detect undefined references', () => {
+		const expectedErrorMessage = 'Undefined env reference to "NOTHING" from "TEST"';
+
+		expect(() => configure(UndefinedReferenceEnvironment)).toThrow(
+			new UndefinedReferenceError(expectedErrorMessage)
+		);
 	});
 });
