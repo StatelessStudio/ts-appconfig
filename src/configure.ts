@@ -67,11 +67,7 @@ export function configure<T extends Configuration>(
 		for (const key in expanded) {
 			const val = expanded[key];
 
-			if (typeof val !== 'string') {
-				continue;
-			}
-
-			process.env[key] = val;
+			process.env[key] = `${val}`;
 		}
 	}
 
