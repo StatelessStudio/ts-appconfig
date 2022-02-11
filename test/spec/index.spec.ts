@@ -1,6 +1,6 @@
 import 'jasmine';
 
-import { Configuration, configure, defaultConfigurationOptions } from '../src';
+import { Configuration, configure, defaultConfigurationOptions } from '../../src';
 
 describe('ts-appconfig', () => {
 	it('exports a configuration class', () => {

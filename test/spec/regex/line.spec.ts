@@ -1,4 +1,4 @@
-import { lineRegex } from '../../src/regex/line';
+import { lineRegex } from '../../../src/regex/line';
 
 describe('regex/line', () => {
 	it('tests positive on env line', () => {

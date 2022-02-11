@@ -1,4 +1,4 @@
-import { floatNumberRegex } from '../../src/regex/float-number';
+import { floatNumberRegex } from '../../../src/regex/float-number';
 
 describe('regex/float-number', () => {
 	it('tests positive on float numbers', () => {

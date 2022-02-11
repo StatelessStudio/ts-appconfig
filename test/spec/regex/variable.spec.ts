@@ -1,4 +1,4 @@
-import { variableRegex } from '../../src/regex/variable';
+import { variableRegex } from '../../../src/regex/variable';
 
 describe('regex/variable', () => {
 	it('tests positive on variable', () => {

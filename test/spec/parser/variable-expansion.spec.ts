@@ -1,8 +1,8 @@
 import {
 	CircularReferenceError
-} from '../../src/errors/circular-reference';
+} from '../../../src/errors/circular-reference';
 
-import { AppConfig, configure } from '../../src';
+import { AppConfig, configure } from '../../../src';
 
 export class Environment extends AppConfig {
 	NESTED = '${C}';

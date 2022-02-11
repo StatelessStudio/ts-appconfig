@@ -1,4 +1,4 @@
-import { AppConfig, configure } from '../src';
+import { AppConfig, configure } from '../../src';
 
 class Environment extends AppConfig {
 }

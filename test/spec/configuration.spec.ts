@@ -1,4 +1,4 @@
-import { Configuration } from '../src';
+import { Configuration } from '../../src';
 
 class Environment extends Configuration {
 }

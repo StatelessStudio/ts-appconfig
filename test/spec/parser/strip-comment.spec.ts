@@ -1,4 +1,4 @@
-import { stripComment } from '../../src/parser/strip-comment';
+import { stripComment } from '../../../src/parser/strip-comment';
 
 describe('parser/strip-comment', () => {
 	it('does nothing on uncommented lines', () => {

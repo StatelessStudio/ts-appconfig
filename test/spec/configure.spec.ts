@@ -1,4 +1,4 @@
-import { Configuration, configure, UndeclaredKeyError } from '../src';
+import { Configuration, configure, UndeclaredKeyError } from '../../src';
 
 class Environment extends Configuration {
 	readonly APP_TITLE='';
