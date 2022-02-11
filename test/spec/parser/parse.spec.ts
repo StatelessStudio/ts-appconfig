@@ -1,9 +1,9 @@
 import {
 	DuplicateKeyError,
 	UnparsableLineError
-} from '../../src';
-import { RawKeyValues } from '../../src/types';
-import { parseLines } from '../../src/parser/parse';
+} from '../../../src';
+import { RawKeyValues } from '../../../src/types';
+import { parseLines } from '../../../src/parser/parse';
 
 describe('parser/parse', () => {
 	it('can parse lines', () => {

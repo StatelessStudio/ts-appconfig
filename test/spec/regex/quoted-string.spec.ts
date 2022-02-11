@@ -1,4 +1,4 @@
-import { quotedStringRegex } from '../../src/regex/quoted-string';
+import { quotedStringRegex } from '../../../src/regex/quoted-string';
 
 describe('regex/quoted-string', () => {
 	it('tests positive on double-quoted string', () => {

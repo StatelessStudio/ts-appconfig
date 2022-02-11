@@ -1,4 +1,4 @@
-import { newLineRegex } from '../../src/regex/new-line';
+import { newLineRegex } from '../../../src/regex/new-line';
 
 describe('regex/new-line', () => {
 	it('tests positive on \n', () => {

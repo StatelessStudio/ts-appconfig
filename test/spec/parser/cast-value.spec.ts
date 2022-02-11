@@ -1,4 +1,4 @@
-import { castValue } from '../../src/parser/cast-value';
+import { castValue } from '../../../src/parser/cast-value';
 
 describe('parser/cast-value', () => {
 	it('can accept undefined value', () => {

@@ -1,4 +1,4 @@
-import { intNumberRegex } from '../../src/regex/int-number';
+import { intNumberRegex } from '../../../src/regex/int-number';
 
 describe('regex/int-number', () => {
 	it('tests positive on integer numbers', () => {

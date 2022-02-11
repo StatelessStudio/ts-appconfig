@@ -1,4 +1,7 @@
-import { CircularReferenceError } from '../errors/circular-reference';
+import {
+	CircularReferenceError,
+	UndefinedReferenceError
+} from '../errors';
 import { Configuration } from '../configuration';
 import { variableRegex } from '../regex/variable';
 
@@ -26,15 +29,24 @@ export function variableExpansion<T extends Configuration>(config: T): T {
 
 			if (parts) {
 				const reference: string = parts[1];
-				const refval: string = config[reference];
 
-				if (refval.includes('${' + key + '}')) {
+				if (!(reference in config)) {
+					throw new UndefinedReferenceError(
+						'Undefined env reference to ' +
+						`"${reference}" from "${key}"`
+					);
+				}
+
+				const refval: string = config[reference];
+				const refvalIsString = (typeof refval === 'string');
+
+				if (refvalIsString && refval.includes('${' + key + '}')) {
 					throw new CircularReferenceError(
 						`Circular env reference: "${key}" and "${reference}"`
 					);
 				}
 
-				if (typeof refval === 'string' && variableRegex.test(refval)) {
+				if (refvalIsString && variableRegex.test(refval)) {
 					// The key that is referenced is yet to be resolved
 					nSkipped++;
 

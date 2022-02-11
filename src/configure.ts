@@ -62,6 +62,13 @@ export function configure<T extends Configuration>(
 	// Variable expansion
 	const expanded: T = variableExpansion(configInstance);
 
+	// Hydrate back to process.env
+	if (options.overwriteProcessEnv) {
+		for (const key in expanded) {
+			process.env[key] = `${expanded[key]}`;
+		}
+	}
+
 	// Return
 	return expanded;
 }

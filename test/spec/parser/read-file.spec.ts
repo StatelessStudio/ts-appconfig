@@ -1,4 +1,4 @@
-import { readFileLines } from '../../src/parser/read-file';
+import { readFileLines } from '../../../src/parser/read-file';
 
 describe('parser/read-file', () => {
 	it('can read a file', () => {
