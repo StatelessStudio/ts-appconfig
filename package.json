@@ -51,5 +51,17 @@
 		"url": "https://github.com/StatelessStudio/ts-appconfig/issues"
 	},
 	"homepage": "https://github.com/StatelessStudio/ts-appconfig#readme",
-	"keywords": []
+	"keywords": [
+		"environment",
+		"variables",
+		"typescript",
+		"strongly-typed",
+		"typed",
+		"strong",
+		"dotenv",
+		"env",
+		".env",
+		"config",
+		"settings"
+	]
 }
