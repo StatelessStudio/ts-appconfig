@@ -3,6 +3,7 @@
 ## [1.1.0]
 
 ### Additions
+- [Issue #5] Add readme section for options
 - [Issue #2] Add option to disable overwriting process.env
 - Typescript Template v2
 
