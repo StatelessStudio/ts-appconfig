@@ -1,7 +1,7 @@
 {
 	"name": "ts-appconfig",
 	"private": "true",
-	"version": "1.0.0",
+	"version": "1.1.0",
 	"ts-project-version": "2.0.0",
 	"description": "Strongly Typed DotENV - Environment Variables",
 	"scripts": {
