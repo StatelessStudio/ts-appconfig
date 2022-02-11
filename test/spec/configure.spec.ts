@@ -8,6 +8,10 @@ class ProcessEnvTestEnvironment extends Configuration {
 	readonly PROC_ENV = 'test';
 }
 
+class ProcessEnvTest2Environment extends Configuration {
+	readonly PROC_ENV2 = 'test';
+}
+
 describe('configure', () => {
 	it('loads env variables', () => {
 		const env: Environment = configure(Environment);
@@ -23,10 +27,17 @@ describe('configure', () => {
 		})).toThrow(new UndeclaredKeyError(expectedErrorMessage));
 	});
 
-	it('hydrates process.env', () => {
+	it('rehydrates process.env', () => {
 		expect(process.env.PROC_ENV).toBe(undefined);
 
 		configure(ProcessEnvTestEnvironment);
 		expect(process.env.PROC_ENV).toBe('test');
+	});
+
+	it('doesn\'t rehydrate process.env when disabled', () => {
+		expect(process.env.PROC_ENV2).toBe(undefined);
+
+		configure(ProcessEnvTest2Environment, { overwriteProcessEnv: false });
+		expect(process.env.PROC_ENV2).toBe(undefined);
 	});
 });

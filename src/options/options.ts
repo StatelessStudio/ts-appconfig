@@ -14,4 +14,14 @@ export interface ConfigurationOptions extends ParserOptions {
 	 *	e.g. `APP_TITLE: string;` opposed to `APP_TITLE: string = '';`
 	 */
 	allowUndeclared?: boolean;
+
+	/**
+	 * If true, overwriteProcessEnv will set/reset process.env variables
+	 * 	after the default schema and .env file are loaded. This way, variables
+	 * 	defined in your schema class or that are in the .env will also be
+	 * 	available in process.env. This is useful for packages that read
+	 * 	directly from process.env. Disable this option to read-only from
+	 * 	process.env.
+	 */
+	overwriteProcessEnv?: boolean;
 }
