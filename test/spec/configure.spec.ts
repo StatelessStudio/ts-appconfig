@@ -4,6 +4,10 @@ class Environment extends Configuration {
 	readonly APP_TITLE='';
 }
 
+class ProcessEnvTestEnvironment extends Configuration {
+	readonly PROC_ENV = 'test';
+}
+
 describe('configure', () => {
 	it('loads env variables', () => {
 		const env: Environment = configure(Environment);
@@ -17,5 +21,12 @@ describe('configure', () => {
 		expect(() => configure(Environment, {
 			allowUndeclared: false
 		})).toThrow(new UndeclaredKeyError(expectedErrorMessage));
+	});
+
+	it('hydrates process.env', () => {
+		expect(process.env.PROC_ENV).toBe(undefined);
+
+		configure(ProcessEnvTestEnvironment);
+		expect(process.env.PROC_ENV).toBe('test');
 	});
 });

@@ -17,8 +17,8 @@ export class Environment extends AppConfig {
 export const env: Environment = configure(Environment);
 
 export class CircularRefEnvironment extends AppConfig {
-	A = '${B}';
-	B = '${A}';
+	CIRCLE_A = '${CIRCLE_B}';
+	CIRCLE_B = '${CIRCLE_A}';
 }
 
 export class UndefinedReferenceEnvironment extends AppConfig {
@@ -35,7 +35,8 @@ describe('parser/variable-expansion', () => {
 	});
 
 	it('can detect circular references', () => {
-		const expectedErrorMessage = 'Circular env reference: "A" and "B"';
+		const expectedErrorMessage =
+			'Circular env reference: "CIRCLE_A" and "CIRCLE_B"';
 
 		expect(() => configure(CircularRefEnvironment)).toThrow(
 			new CircularReferenceError(expectedErrorMessage)
