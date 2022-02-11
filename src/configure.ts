@@ -65,9 +65,7 @@ export function configure<T extends Configuration>(
 	// Hydrate back to process.env
 	if (options.overwriteProcessEnv) {
 		for (const key in expanded) {
-			const val = expanded[key];
-
-			process.env[key] = `${val}`;
+			process.env[key] = `${expanded[key]}`;
 		}
 	}
 
