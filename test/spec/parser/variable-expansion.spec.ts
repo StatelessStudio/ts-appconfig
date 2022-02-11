@@ -9,6 +9,8 @@ export class Environment extends AppConfig {
 	A = 'Hello';
 	B = 'World';
 	C = '${A} ${B}';
+	NUMBER = 2;
+	NUMBER_REF = '${NUMBER}';
 }
 
 export const env: Environment = configure(Environment);
@@ -33,5 +35,9 @@ describe('parser/variable-expansion', () => {
 		expect(() => configure(CircularRefEnvironment)).toThrow(
 			new CircularReferenceError(expectedErrorMessage)
 		);
+	});
+
+	it('can reference a number variable', () => {
+		expect(env.NUMBER_REF).toBe('2');
 	});
 });

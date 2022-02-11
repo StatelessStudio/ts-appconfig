@@ -27,14 +27,15 @@ export function variableExpansion<T extends Configuration>(config: T): T {
 			if (parts) {
 				const reference: string = parts[1];
 				const refval: string = config[reference];
+				const refvalIsString = (typeof refval === 'string');
 
-				if (refval.includes('${' + key + '}')) {
+				if (refvalIsString && refval.includes('${' + key + '}')) {
 					throw new CircularReferenceError(
 						`Circular env reference: "${key}" and "${reference}"`
 					);
 				}
 
-				if (typeof refval === 'string' && variableRegex.test(refval)) {
+				if (refvalIsString && variableRegex.test(refval)) {
 					// The key that is referenced is yet to be resolved
 					nSkipped++;
 
