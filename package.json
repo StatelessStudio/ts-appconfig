@@ -1,11 +1,13 @@
 {
 	"name": "ts-appconfig",
-	"version": "1.1.0",
-	"ts-project-version": "1.2.4",
 	"private": "true",
+	"version": "1.0.0",
+	"ts-project-version": "2.0.0",
+	"description": "Strongly Typed DotENV - Environment Variables",
 	"scripts": {
 		"start": "npm run dev",
 		"dev": "npm run lint && ts-node src/index.ts",
+		"watch": "nodemon .",
 		"test": "npm run build:dev:clean && npm run coverage",
 		"clean": "rm -rf dist",
 		"build:dev": "npm run lint && npm run preprocess && npm run compile && npm run postprocess",
@@ -20,22 +22,34 @@
 		"lint:prod": "eslint . --ext .ts --fix --config=.eslintrc.prod.json",
 		"coverage": "nyc npm run coverage-test",
 		"coverage-test": "jasmine --config=jasmine.json",
-		"coveralls": "cat ./coverage/lcov.info | coveralls"
+		"coveralls": "cat ./coverage/lcov.info | coveralls",
+		"admin:example": "ts-node script/example"
 	},
 	"devDependencies": {
 		"@istanbuljs/nyc-config-typescript": "^1.0.2",
 		"@types/jasmine": "^3.10.3",
 		"@types/node": "^16.11.21",
-		"@typescript-eslint/eslint-plugin": "^4.33.0",
-		"@typescript-eslint/parser": "^4.33.0",
+		"@typescript-eslint/eslint-plugin": "^5.10.0",
+		"@typescript-eslint/parser": "^5.10.0",
 		"coveralls": "^3.1.1",
-		"eslint": "^7.32.0",
-		"jasmine": "^3.99.0",
+		"eslint": "^8.7.0",
+		"jasmine": "^4.0.2",
+		"nodemon": "^2.0.15",
 		"nyc": "^15.1.0",
-		"source-map-support": "^0.5.21",
 		"ts-node": "^10.4.0",
 		"ts-packager": "^1.0.1",
 		"typedoc": "^0.22.11",
 		"typescript": "^4.5.4"
-	}
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/StatelessStudio/ts-appconfig.git"
+	},
+	"author": "stateless-studio",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/StatelessStudio/ts-appconfig/issues"
+	},
+	"homepage": "https://github.com/StatelessStudio/ts-appconfig#readme",
+	"keywords": []
 }

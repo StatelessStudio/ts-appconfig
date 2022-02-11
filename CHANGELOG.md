@@ -2,8 +2,9 @@
 
 ## [1.1.0]
 
-## Additions
+### Additions
+- Typescript Template v2
 
-## Fixes
+### Fixes
 
 ## [1.0.0] Initial Release
