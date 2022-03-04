@@ -3,6 +3,7 @@
 ## [1.1.1]
 
 ### Fixes
+- [Issue #7] Readme imports are relative instead of from npm package
 
 ## [1.1.0]
 
