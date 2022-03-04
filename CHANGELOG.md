@@ -1,5 +1,11 @@
 # ts-appconfig
 
+## [1.1.1]
+
+### Fixes
+- [Issue #8] .env file variables which are not assigned a value should be skipped
+- [Issue #7] Readme imports are relative instead of from npm package
+
 ## [1.1.0]
 
 ### Additions

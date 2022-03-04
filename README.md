@@ -18,7 +18,7 @@ Create a file where you will declare your environment variable schema:
 
 `src/environment.ts`
 ```typescript
-import { AppConfig, configure } from '../src';
+import { AppConfig, configure } from 'ts-appconfig';
 
 export class Environment extends AppConfig {
 	readonly APP_TITLE: string = '';

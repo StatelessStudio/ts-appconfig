@@ -27,6 +27,13 @@ describe('parser/parse', () => {
 		expect(Object.keys(lines).length).toBe(0);
 	});
 
+	it('ignores lines with no assignment', () => {
+		const line = 'APP_TEST=';
+		const lines: RawKeyValues = parseLines([ line ], {});
+
+		expect(lines.APP_TEST).toBe(undefined);
+	});
+
 	it('skips unparsable lines when skipUnknownLines is true', () => {
 		const line = 'zxcv';
 		const lines: RawKeyValues = parseLines([ line ], {
