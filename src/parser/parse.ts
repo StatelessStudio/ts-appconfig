@@ -30,7 +30,7 @@ export function parseLines(
 		// Parse the line
 		const parts = line.match(lineRegex);
 
-		if (parts === null) {
+		if (parts === null || !parts.length) {
 			if (options.skipUnknownLines) {
 				continue;
 			}
@@ -49,6 +49,11 @@ export function parseLines(
 		}
 
 		// Read val
+		if (!(2 in parts) || !parts[2]) {
+			// Value is undefined, ignore
+			continue;
+		}
+
 		const val = stripComment(parts[2]);
 
 		// Assign value
