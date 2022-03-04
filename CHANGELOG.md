@@ -1,5 +1,9 @@
 # ts-appconfig
 
+## [1.1.1]
+
+### Fixes
+
 ## [1.1.0]
 
 ### Additions
