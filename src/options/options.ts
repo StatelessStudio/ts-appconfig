@@ -16,6 +16,12 @@ export interface ConfigurationOptions extends ParserOptions {
 	allowUndeclared?: boolean;
 
 	/**
+	 * If true, fromProcessEnv will load .env variables from process.env, which
+	 * 	will overwrite file-level .env variables.
+	 */
+	fromProcessEnv?: boolean;
+
+	/**
 	 * If true, overwriteProcessEnv will set/reset process.env variables
 	 * 	after the default schema and .env file are loaded. This way, variables
 	 * 	defined in your schema class or that are in the .env will also be

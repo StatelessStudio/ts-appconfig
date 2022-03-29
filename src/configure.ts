@@ -55,8 +55,10 @@ export function configure<T extends Configuration>(
 	}
 
 	// Hydrate from process.env
-	for (const key in process.env) {
-		configInstance[key] = castValue(process.env[key]);
+	if (options.fromProcessEnv) {
+		for (const key in process.env) {
+			configInstance[key] = castValue(process.env[key]);
+		}
 	}
 
 	// Variable expansion

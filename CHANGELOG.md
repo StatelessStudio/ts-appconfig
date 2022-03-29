@@ -3,6 +3,7 @@
 ## [1.2.0]
 
 ### Additions
+- [Issue #12] Add option to prevent reading from process.env
 
 ## [1.1.1]
 
