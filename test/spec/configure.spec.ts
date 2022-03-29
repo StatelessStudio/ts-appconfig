@@ -31,6 +31,49 @@ describe('configure', () => {
 		})).toThrow(new UndeclaredKeyError(expectedErrorMessage));
 	});
 
+	it('can accept an absolute path without a filename', () => {
+		const env: Environment = configure(Environment, {
+			absolutePath: path.join(process.cwd(), 'test', 'envs'),
+			overwriteProcessEnv: false,
+			fromProcessEnv: false,
+		});
+
+		expect(env.APP_TITLE).toBe('Default filename');
+	});
+
+	it('can accept an absolute path with a filename', () => {
+		const env: Environment = configure(Environment, {
+			absolutePath: path.join(
+				process.cwd(),
+				'test/envs/absolute.env'
+			),
+			overwriteProcessEnv: false,
+			fromProcessEnv: false,
+		});
+
+		expect(env.APP_TITLE).toBe('Absolute Path');
+	});
+
+	it('can accept a relative path without a filename', () => {
+		const env: Environment = configure(Environment, {
+			relativePath: 'test/envs/',
+			overwriteProcessEnv: false,
+			fromProcessEnv: false,
+		});
+
+		expect(env.APP_TITLE).toBe('Default filename');
+	});
+
+	it('can accept a relative path with a filename', () => {
+		const env: Environment = configure(Environment, {
+			relativePath: 'test/envs/relative.env',
+			overwriteProcessEnv: false,
+			fromProcessEnv: false,
+		});
+
+		expect(env.APP_TITLE).toBe('Relative Path');
+	});
+
 	it('reads from process.env', () => {
 		process.env.TEST_READ_PROCESS_ENV = 'read';
 
@@ -41,7 +84,10 @@ describe('configure', () => {
 	it('doesn\'t read from process.env when disabled', () => {
 		process.env.TEST_DISABLE_READ_PROCESS_ENV = 'read';
 
-		const env = configure(ProcessEnvTestEnvironment, { fromProcessEnv: false });
+		const env = configure(
+			ProcessEnvTestEnvironment,
+			{ fromProcessEnv: false }
+		);
 		expect(env.TEST_DISABLE_READ_PROCESS_ENV).not.toBe('read');
 	});
 

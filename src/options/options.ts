@@ -2,9 +2,15 @@ import { ParserOptions } from './parser-options';
 
 export interface ConfigurationOptions extends ParserOptions {
 	/**
-	 * Relative filename to load (relative to cwd)
+	 * Absolute filename to load
 	 */
-	relativePath: string;
+	absolutePath?: string;
+
+	/**
+	 * Relative filename to load (relative to cwd). Disabled if absolutePath
+	 * 	is provided
+	 */
+	relativePath?: string;
 
 	/**
 	 * This check throws an exception if there is a key in the .env file
