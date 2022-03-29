@@ -5,5 +5,6 @@ export const defaultConfigurationOptions: ConfigurationOptions = {
 	allowDuplicates: false,
 	allowUndeclared: true,
 	skipUnknownLines: false,
+	fromProcessEnv: true,
 	overwriteProcessEnv: true,
 };

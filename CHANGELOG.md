@@ -1,5 +1,11 @@
 # ts-appconfig
 
+## [1.2.0]
+
+### Additions
+- [Issue #12] Add option to prevent reading from process.env
+- [Issue #11] Add support for relative & absolute filepaths
+
 ## [1.1.1]
 
 ### Fixes

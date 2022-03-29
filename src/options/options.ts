@@ -2,9 +2,15 @@ import { ParserOptions } from './parser-options';
 
 export interface ConfigurationOptions extends ParserOptions {
 	/**
-	 * Relative filename to load (relative to cwd)
+	 * Absolute filename to load
 	 */
-	relativePath: string;
+	absolutePath?: string;
+
+	/**
+	 * Relative filename to load (relative to cwd). Disabled if absolutePath
+	 * 	is provided
+	 */
+	relativePath?: string;
 
 	/**
 	 * This check throws an exception if there is a key in the .env file
@@ -14,6 +20,12 @@ export interface ConfigurationOptions extends ParserOptions {
 	 *	e.g. `APP_TITLE: string;` opposed to `APP_TITLE: string = '';`
 	 */
 	allowUndeclared?: boolean;
+
+	/**
+	 * If true, fromProcessEnv will load .env variables from process.env, which
+	 * 	will overwrite file-level .env variables.
+	 */
+	fromProcessEnv?: boolean;
 
 	/**
 	 * If true, overwriteProcessEnv will set/reset process.env variables
