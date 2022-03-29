@@ -63,6 +63,10 @@ export const env: Environment = configure(Environment, {
 	//	Default: false
 	allowUndeclared: false,
 
+	// If true, fromProcessEnv will load .env variables from process.env
+	//  Default: true
+	fromProcessEnv: true,
+
 	// Set process.env variables from the .env file
 	//	Default: true
 	overwriteProcessEnv: true,
