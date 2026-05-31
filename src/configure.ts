@@ -11,7 +11,7 @@ import { parseLines } from './parser/parse';
 import { readFileLines } from './parser/read-file';
 import { castValue } from './parser/cast-value';
 import { variableExpansion } from './parser/variable-expansion';
-import { resolveOptionsFilepath } from './options/resolve-options-filepath';
+import { resolveOptionsFilepaths } from './options/resolve-options-filepath';
 
 /**
  * Create and hydrate a Configuration instance
@@ -32,10 +32,15 @@ export function configure<T extends Configuration>(
 		options = Object.assign({}, defaultConfigurationOptions);
 	}
 
-	// Read vars
-	const file = resolveOptionsFilepath(options);
-	const lines: string[] = readFileLines(file);
-	const envFileVars: RawKeyValues = parseLines(lines, options);
+	// Read vars from all configured files, later files override earlier ones
+	const files = resolveOptionsFilepaths(options);
+	let envFileVars: RawKeyValues = {};
+
+	for (const file of files) {
+		const lines: string[] = readFileLines(file);
+		const fileVars: RawKeyValues = parseLines(lines, options);
+		envFileVars = Object.assign({}, envFileVars, fileVars);
+	}
 
 	// Create instance
 	const configInstance: T = new configClass();

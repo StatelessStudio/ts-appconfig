@@ -14,3 +14,7 @@ export { UnparsableLineError } from './errors/unparsable-line';
 // Options
 export { defaultConfigurationOptions } from './options/defaults';
 export { ConfigurationOptions } from './options/options';
+export {
+	resolveOptionsFilepath,
+	resolveOptionsFilepaths
+} from './options/resolve-options-filepath';

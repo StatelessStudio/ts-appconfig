@@ -3,6 +3,8 @@ import { Configuration, configure, UndeclaredKeyError } from '../../src';
 
 class Environment extends Configuration {
 	readonly APP_TITLE='';
+	readonly FIRST_ONLY='';
+	readonly SECOND_ONLY='';
 }
 
 class ProcessEnvTestEnvironment extends Configuration {
@@ -72,6 +74,36 @@ describe('configure', () => {
 		});
 
 		expect(env.APP_TITLE).toBe('Relative Path');
+	});
+
+	it('can load multiple absolute paths, with later files overriding', () => {
+		const env: Environment = configure(Environment, {
+			absolutePaths: [
+				path.join(process.cwd(), 'test/envs/multi-first.env'),
+				path.join(process.cwd(), 'test/envs/multi-second.env'),
+			],
+			overwriteProcessEnv: false,
+			fromProcessEnv: false,
+		});
+
+		expect(env.APP_TITLE).toBe('Second Env');
+		expect(env.FIRST_ONLY).toBe('from first');
+		expect(env.SECOND_ONLY).toBe('from second');
+	});
+
+	it('can load multiple relative paths, with later files overriding', () => {
+		const env: Environment = configure(Environment, {
+			relativePaths: [
+				'test/envs/multi-first.env',
+				'test/envs/multi-second.env',
+			],
+			overwriteProcessEnv: false,
+			fromProcessEnv: false,
+		});
+
+		expect(env.APP_TITLE).toBe('Second Env');
+		expect(env.FIRST_ONLY).toBe('from first');
+		expect(env.SECOND_ONLY).toBe('from second');
 	});
 
 	it('reads from process.env', () => {
