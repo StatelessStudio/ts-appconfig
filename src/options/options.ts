@@ -7,10 +7,23 @@ export interface ConfigurationOptions extends ParserOptions {
 	absolutePath?: string;
 
 	/**
+	 * Array of absolute filenames to load sequentially. Later files override
+	 * 	earlier ones. Combined with absolutePath if also provided.
+	 */
+	absolutePaths?: string[];
+
+	/**
 	 * Relative filename to load (relative to cwd). Disabled if absolutePath
 	 * 	is provided
 	 */
 	relativePath?: string;
+
+	/**
+	 * Array of relative filenames to load sequentially (relative to cwd).
+	 * 	Later files override earlier ones. Combined with relativePath if also
+	 * 	provided.
+	 */
+	relativePaths?: string[];
 
 	/**
 	 * This check throws an exception if there is a key in the .env file
