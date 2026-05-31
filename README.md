@@ -48,6 +48,79 @@ Output:
 Cool App
 ```
 
+## Variable Expansion
+
+ts-appconfig supports variable expansion using the `${VARIABLE_NAME}` syntax. You can reference other variables within your environment schema or `.env` file, and they will be resolved automatically.
+
+**Basic expansion:**
+
+`.env`
+```
+APP_HOST=localhost
+APP_PORT=3000
+APP_URL=http://${APP_HOST}:${APP_PORT}
+```
+
+`src/environment.ts`
+```typescript
+export class Environment extends AppConfig {
+	readonly APP_HOST: string = '';
+	readonly APP_PORT: string = '';
+	readonly APP_URL: string = '';
+}
+
+export const env: Environment = configure(Environment);
+```
+
+`env.APP_URL` will resolve to `http://localhost:3000`.
+
+**Nested expansion:**
+
+Variables can reference other variables that are themselves references. ts-appconfig will resolve them in multiple passes until all variables are expanded.
+
+`.env`
+```
+FIRST=Hello
+SECOND=${FIRST} World
+THIRD=${SECOND}!
+```
+
+`env.THIRD` will resolve to `Hello World!`.
+
+**Referencing number variables:**
+
+When a string variable references a number variable, the number is cast to a string during expansion.
+
+```typescript
+export class Environment extends AppConfig {
+	readonly PORT: number = 3000;
+	readonly URL: string = 'http://localhost:${PORT}';
+}
+```
+
+`env.URL` will resolve to `'http://localhost:3000'`.
+
+**Circular references:**
+
+If two variables reference each other, a `CircularReferenceError` is thrown at configuration time.
+
+```typescript
+export class Environment extends AppConfig {
+	readonly A: string = '${B}';
+	readonly B: string = '${A}'; // CircularReferenceError!
+}
+```
+
+**Undefined references:**
+
+If a variable references a name that does not exist in the schema, an `UndefinedReferenceError` is thrown at configuration time.
+
+```typescript
+export class Environment extends AppConfig {
+	readonly A: string = '${DOES_NOT_EXIST}'; // UndefinedReferenceError!
+}
+```
+
 ## Options
 
 Pass `ConfigurationOptions` as a second argument to `configure` to customize how variables are loaded and parsed. All options are optional, you only have to specify the options you would like to change.
