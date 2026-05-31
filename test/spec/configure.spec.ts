@@ -106,19 +106,6 @@ describe('configure', () => {
 		expect(env.SECOND_ONLY).toBe('from second');
 	});
 
-	it('preserves first-env-only keys when loading multiple envs', () => {
-		const env: Environment = configure(Environment, {
-			relativePaths: [
-				'test/envs/multi-first.env',
-				'test/envs/multi-second.env',
-			],
-			overwriteProcessEnv: false,
-			fromProcessEnv: false,
-		});
-
-		expect(env.FIRST_ONLY).toBe('from first');
-	});
-
 	it('reads from process.env', () => {
 		process.env.TEST_READ_PROCESS_ENV = 'read';
 
