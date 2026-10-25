@@ -13,6 +13,16 @@ describe('parser/parse', () => {
 		expect(lines['APP_TITLE']).toBe('Hello');
 	});
 
+	it('can parse quoted multi-line values', () => {
+		const lines = parseLines([
+			'APP_TITLE="Hello',
+			'',
+			'World"'
+		], {});
+
+		expect(lines.APP_TITLE).toBe('"Hello\n\nWorld"');
+	});
+
 	it('ignores empty lines', () => {
 		const line = '';
 		const lines: RawKeyValues = parseLines([ line ], {});

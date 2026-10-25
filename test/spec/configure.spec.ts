@@ -22,6 +22,16 @@ describe('configure', () => {
 		expect(env.APP_TITLE).toBe('Typescript App Config');
 	});
 
+	it('loads multi-line env variables', () => {
+		const env = configure(Environment, {
+			relativePath: 'test/envs/multiline.env',
+			fromProcessEnv: false,
+			overwriteProcessEnv: false
+		});
+
+		expect(env.APP_TITLE).toBe('Hello\n\nWorld');
+	});
+
 	it('can check for undeclared variables', () => {
 		const expectedErrorMessage =
 			'Key "NODE_ENV" not specified in config class';
