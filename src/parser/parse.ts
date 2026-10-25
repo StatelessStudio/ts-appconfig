@@ -5,6 +5,30 @@ import { RawKeyValues } from '../types';
 import { lineRegex } from '../regex/line';
 import { stripComment } from './strip-comment';
 
+function isQuotedValueComplete(value: string): boolean {
+	const quote = value[0];
+
+	if (quote !== '"' && quote !== '\'') {
+		return true;
+	}
+
+	let isEscaped = false;
+
+	for (let i = 1; i < value.length; i++) {
+		if (isEscaped) {
+			isEscaped = false;
+		}
+		else if (value[i] === '\\') {
+			isEscaped = true;
+		}
+		else if (value[i] === quote) {
+			return true;
+		}
+	}
+
+	return false;
+}
+
 /**
  * Parse lines into string/string key-values
  *
@@ -18,7 +42,9 @@ export function parseLines(
 ): RawKeyValues {
 	const vars: RawKeyValues = {};
 
-	for (let line of lines) {
+	for (let i = 0; i < lines.length; i++) {
+		let line = lines[i];
+
 		// Trim the line
 		line = line.trim();
 
@@ -28,7 +54,22 @@ export function parseLines(
 		}
 
 		// Parse the line
-		const parts = line.match(lineRegex);
+		let parts = line.match(lineRegex);
+
+		if (parts !== null && parts[2] && !isQuotedValueComplete(parts[2])) {
+			let value = parts[2];
+
+			for (let nextLine = i + 1; nextLine < lines.length; nextLine++) {
+				value += `\n${lines[nextLine]}`;
+
+				if (isQuotedValueComplete(value)) {
+					line += `\n${lines.slice(i + 1, nextLine + 1).join('\n')}`;
+					i = nextLine;
+					parts = line.match(lineRegex);
+					break;
+				}
+			}
+		}
 
 		if (parts === null || !parts.length) {
 			if (options.skipUnknownLines) {

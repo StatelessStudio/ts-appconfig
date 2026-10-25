@@ -15,4 +15,14 @@ describe('parser/read-file', () => {
 		expect(Array.isArray(lines)).toBeTrue();
 		expect(lines.length).toBe(0);
 	});
+
+	it('preserves empty lines', () => {
+		const lines = readFileLines('test/envs/multiline.env');
+
+		expect(lines).toEqual([
+			'APP_TITLE="Hello',
+			'',
+			'World"'
+		]);
+	});
 });
